@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+	<head>
+		<title>Your Shopping Cart</title>
+		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.23/angular.min.js"></script>
+	
+	</head>
+	<body>
+		
+		<h1>Your Order</h1>
+		
+		<div ng-controller="HelloController">			
+			<p ng-repeat='item in text'>
+				
+			Your name: <input type="text" ng-model="item.info" placeholder="World">
+	       	Hello {{item.info||'World'}}! 					
+			</p>
+		
+		</div>
+		<script>
+			function HelloController($scope) {
+				
+				var text = {};
+				text[0].info = 'I\'m a chinese';
+				text[1] .info= 'Hello world';
+				text[2].info = 'All is well....';
+				
+				$scope.text = text;
+			}
+		</script>
+		
+
+       	
+
+	</body>
+	
+</html>
+
