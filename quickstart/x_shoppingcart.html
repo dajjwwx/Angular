@@ -2,10 +2,14 @@
 <html ng-app="myApp">
 	<head>
 		<title>Your Shopping Cart</title>
-		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.23/angular.min.js"></script>
+		<script src="../angular.min.js"></script>
 		<script>
 			
-			function CartController($scope) {
+			function CartController($scope) {				
+			
+			
+				$scope.bill = {};
+			
 				$scope.items = [
 					{title:'Panit pots',quantity:8,price:3.95},
 					{title:'Polka',quantity:17,price:12.94},
@@ -15,7 +19,30 @@
 				$scope.remove = function(index) {
 					$scope.items.splice(index,1);
 				};
+				
+				$scope.totalCart = function(){					
+					var total = 0;
+					for(var i=0, len = $scope.items.length; i<len; i++){
+						total = total + $scope.items[i].price * $scope.items[i].quantity;
+					}
+					return total;					
+				}
+				
+				$scope.subtotal = function(){
+					return $scope.totalCart() - $scope.bill.discount;
+				}
+				
+				function calculateDiscount(newValue, oldValue, $scope){
+					$scope.bill.discount = newValue > 100 ? 10 : 0;
+				}
+				
+				$scope.$watch($scope.totalCart, calculateDiscount);
 			}
+			
+			
+			
+			//在模块中注册控制器
+			angular.module('myApp',[]).controller('CartController',CartController);
 			
 		</script>		
 	</head>
@@ -28,7 +55,11 @@
 			<span>{{item.price|currency}}</span>
 			<span>{{item.price * item.quantity|currency}}</span>
 			<button ng-click="remove($index)">Remove</button>			
-		</div>		
+		</div>	
+		<div>Total:{{totalCart()|currency}}</div>
+		<div>Discount:{{bill.discount|currency}}</div>
+		<div>Subtotal:{{subtotal()|currency}}</div>
+		
 	</body>
 	
 </html>
