@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html ng-app="AMail">
+	<head>
+		<title>Your Shopping Cart</title>
+		<meta charset="UTF-8" />
+		<script src="../../angular.min.js"></script>
+		<script>
+		var aMailServices = angular.module('Amail', []);
+function emailRouteConfig($routProvider) {
+	$routProvider.when('/', {
+		controller : ListController,
+		templateUrl : 'list.html'
+	}).when('/view/:id', {
+		controller : DetailController,
+		templateUrl : 'detail.html'
+	}).otherwise({
+		redirectTo : '/'
+	})
+}
+aMailServices.config(emailRouteConfig);
+function ListController($scope) {}
+function DetailController($scope) {}
+		</script>
+		<!--<script src="controller.js"></script>-->
+	</head>
+	<body>		
+		<h1>Location</h1>
+		<div ng-view></div>		
+	</body>
+	
+</html>
+

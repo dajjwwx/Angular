@@ -1,0 +1,38 @@
+<!doctype html>
+<html ng-app>
+    <head>
+        <script src="../angular.min.js"></script>
+        <script src="controller.js"></script>
+    </head>
+    <body>
+    	
+    	
+    	<div ng-controller="HelloController">
+     		<input ng-model="greeting.text" >
+    		<p>{{greeting.text}}, World</p>
+   		
+    		<hr />
+    		<h1>QuickStart</h1>
+    		Your name: <input type="text" ng-model="yourname" placeholder="World">
+        	Hello {{yourname||'World'}}!   		
+    	</div>
+    	<hr />
+    	<div ng-controller="TextController">
+    		
+    		<p><input ng-model="text.info" /></p>
+    		
+    		<p>{{text.info||'Hello'}}</p>
+    	</div>
+    	<script>
+	    	function HelloController($scope) {
+				$scope.greeting = {text:'Hello'};
+			}
+    		function TextController($scope) {
+    			$scope.text = {info:'message'};
+    		}
+    	</script>
+
+
+
+    </body>
+</html>
